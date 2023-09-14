@@ -447,7 +447,8 @@ function bindCollectionToApiItems(
     const method = item.request.method.toLowerCase();
     const path = item.request.url
       .getPath({ unresolved: true }) // unresolved returns "/:variableName" instead of "/<type>"
-      .replace(/:([a-z0-9-_]+)/gi, "{$1}"); // replace "/:variableName" with "/{variableName}"
+      .replace(/:([a-z0-9-_]+)\//gi, "{$1}/"); // replace "/:variableName" with "/{variableName}"
+    // .replace(/:([a-z0-9-_]+)/gi, "{$1}"); // replace "/:variableName" with "/{variableName}"
 
     const apiItem = items.find((item) => {
       if (item.type === "info" || item.type === "tag") {
@@ -564,6 +565,19 @@ export async function processOpenapiFile(
   const items = createItems(openapiData, options, sidebarOptions);
 
   bindCollectionToApiItems(items, postmanCollection);
+
+  // console.log(items, "------items-----------");
+  // console.log(openapiData, "--------openapiData---------");
+  // console.log(postmanCollection, "--------postmanCollection---------");
+  // if (openapiData?.paths["/pet/{petId}/user:page"]) {
+  //   console.log(
+  //     openapiData,
+  //     openapiData.paths["/pet/{petId}/user:page"],
+  //     "-----",
+  //     openapiData.paths["/pet/{petId}/uploadImage"]
+  //   );
+  //   // console.log(items, "items------");
+  // }
 
   let tags: TagObject[] = [];
   if (openapiData.tags !== undefined) {
