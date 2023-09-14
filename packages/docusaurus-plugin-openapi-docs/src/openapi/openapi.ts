@@ -566,19 +566,6 @@ export async function processOpenapiFile(
 
   bindCollectionToApiItems(items, postmanCollection);
 
-  // console.log(items, "------items-----------");
-  // console.log(openapiData, "--------openapiData---------");
-  // console.log(postmanCollection, "--------postmanCollection---------");
-  // if (openapiData?.paths["/pet/{petId}/user:page"]) {
-  //   console.log(
-  //     openapiData,
-  //     openapiData.paths["/pet/{petId}/user:page"],
-  //     "-----",
-  //     openapiData.paths["/pet/{petId}/uploadImage"]
-  //   );
-  //   // console.log(items, "items------");
-  // }
-
   let tags: TagObject[] = [];
   if (openapiData.tags !== undefined) {
     tags = openapiData.tags;
