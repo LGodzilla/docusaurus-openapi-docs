@@ -12,7 +12,7 @@
     "watch": "lerna run watch --parallel",
     "watch:demo": "nodemon --watch \"./packages/*/lib/**/*.*\" --exec \"yarn start --no-open\"",
     "updata": "yarn run build-packages && yarn run watch:demo",
-    "updataApi": "yarn run build-packages && yarn run gen-api",
+    "updataApi": "yarn run clean-api  && yarn run gen-api",
     "updatacleanApi": "yarn run build-packages && yarn run clean-api && yarn run gen-api",
     "build": "yarn build-packages && yarn build-demo",
     "build-packages": "lerna run build --no-private --stream",
