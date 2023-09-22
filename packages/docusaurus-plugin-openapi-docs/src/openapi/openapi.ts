@@ -445,6 +445,23 @@ function bindCollectionToApiItems(
 ) {
   postmanCollection.forEachItem((item: any) => {
     const method = item.request.method.toLowerCase();
+    const Paths: string[] = [];
+    item.request.url.path.forEach((_: string) => {
+      if (_.includes("{{")) {
+        const str = _;
+        const matches = str.match(/\{\{([^}]+)\}\}/g) || "";
+        if (matches[0])
+          Paths.push(
+            ":" +
+              matches[0].substring(2, matches[0].length - 2) +
+              ":" +
+              str.split(":")[1]
+          );
+      } else {
+        Paths.push(_);
+      }
+    });
+    item.request.url.path = Paths;
     const path = item.request.url
       .getPath({ unresolved: true }) // unresolved returns "/:variableName" instead of "/<type>"
       .replace(/\/:([a-z0-9-_]+)/gi, "/{$1}"); // replace "/:variableName" with "/{variableName}"

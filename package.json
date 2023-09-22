@@ -14,6 +14,7 @@
     "updata": "yarn run build-packages && yarn run watch:demo",
     "updataApi": "yarn run clean-api  && yarn run gen-api",
     "updatacleanApi": "yarn run build-packages && yarn run clean-api && yarn run gen-api",
+    "updata:api:demo": "yarn run build-packages && yarn run clean-api && yarn run gen-api && yarn run watch:demo",
     "build": "yarn build-packages && yarn build-demo",
     "build-packages": "lerna run build --no-private --stream",
     "build-demo": "yarn workspace demo build",

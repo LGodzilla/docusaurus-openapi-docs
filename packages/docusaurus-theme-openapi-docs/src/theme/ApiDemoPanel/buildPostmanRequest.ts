@@ -59,9 +59,22 @@ function setQueryParams(postman: sdk.Request, queryParams: Param[]) {
 
 function setPathParams(postman: sdk.Request, queryParams: Param[]) {
   const source = queryParams.map((param) => {
+    const urlPath: string[] = postman.url.path;
+    let paramName = param.name;
+    let paramValue = param.value;
+
+    const name = urlPath.find((_) => {
+      const num = _.match(/:/g) || [];
+      return _[0] === ":" && _.indexOf(param.name) === 1 && num.length > 1;
+    });
+    if (name) {
+      //对于结尾是 /{变量}:常量的做处理
+      paramName = name.substring(1);
+      paramValue = paramValue + ":" + paramName.split(":")[1];
+    }
     return new sdk.Variable({
-      key: param.name,
-      value: param.value || `:${param.name}`,
+      key: paramName,
+      value: paramValue || `:${param.name}`,
     });
   });
   postman.url.variables.assimilate(source, false);
