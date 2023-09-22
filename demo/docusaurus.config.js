@@ -208,10 +208,10 @@ const config = {
         id: "openapi",
         docsPluginId: "classic",
         config: {
-          rm: {
-            specPath: "examples/rm.yaml",
-            outputDir: "docs/rm",
-          },
+          // rm: {
+          //   specPath: "examples/rm.yaml",
+          //   outputDir: "docs/rm",
+          // },
           petstore_versioned: {
             specPath: "examples/petstore.yaml",
             outputDir: "docs/petstore_versioned", // No trailing slash
